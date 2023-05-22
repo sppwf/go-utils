@@ -13,7 +13,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -71,7 +70,7 @@ func ArchiveFile(inputPath string, outputPath string) {
 	tw := tar.NewWriter(writer)
 	defer tw.Close()
 
-	if body, err = ioutil.ReadFile(inputPath); err != nil {
+	if body, err = os.ReadFile(inputPath); err != nil {
 		log.Fatalln(err)
 	}
 
