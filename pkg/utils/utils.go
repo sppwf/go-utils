@@ -7,7 +7,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
-	"crypto/sha1"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
@@ -130,7 +129,7 @@ func Encrypt(plainstring string, passphrase string) string {
 	}
 
 	// Generate the salted key that will be used to create new cipher
-	saltedKey := pbkdf2.Key([]byte(hashKey), salt, iterations, keylen, sha1.New)
+	saltedKey := pbkdf2.Key([]byte(hashKey), salt, iterations, keylen, sha256.New)
 
 	// Create new aes cipher
 	block, err := aes.NewCipher(saltedKey)
